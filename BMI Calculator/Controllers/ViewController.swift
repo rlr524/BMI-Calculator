@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var heightSlider: UISlider!
+    @IBOutlet weak var weightSlider: UISlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,5 +30,16 @@ class ViewController: UIViewController {
         var userWeight: Float
         userWeight = sender.value
         weightLabel.text = "\(String(format: "%.0f", userWeight))Kg"
+    }
+    
+    @IBAction func calculateBMI(_ sender: UIButton) {
+        let heightSquare: Float = powf(heightSlider.value, 2.0)
+        let bmi = weightSlider.value / heightSquare
+        let bmiText = String(format: "%.1f", bmi)
+        
+        let secondVC = SecondViewController()
+        secondVC.bmiValue = bmiText
+        
+        self.present(secondVC, animated: true, completion: nil)
     }
 }
