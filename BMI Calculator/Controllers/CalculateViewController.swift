@@ -26,12 +26,14 @@ class CalculateViewController: UIViewController {
         var userHeight: Float
         userHeight = sender.value
         heightLabel.text = "\(String(format: "%.2f", userHeight))m"
+        print(heightLabel.text ?? "Height label")
      }
 
     @IBAction func weightSliderDidChange(_ sender: UISlider) {
         var userWeight: Float
         userWeight = sender.value
         weightLabel.text = "\(String(format: "%.0f", userWeight))Kg"
+        print(weightLabel.text ?? "Weight label")
     }
     
     @IBAction func calculateBMI(_ sender: UIButton) {
@@ -45,6 +47,8 @@ class CalculateViewController: UIViewController {
         if segue.identifier == "goToResults" {
             let destinationVC = segue.destination as! ResultsViewController
             destinationVC.bmiValue = calculatorBrain.getBMIValue()
+            destinationVC.advice = calculatorBrain.getAdvice()
+            destinationVC.color = calculatorBrain.getColor()
         }
     }
 }
